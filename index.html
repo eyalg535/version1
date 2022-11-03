@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8" />
+  <title>BeerBrewery</title>
+  <h1>Brew Your Own Beer -- By BrewDog Beer-Collection</h1>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div id="beer-header">
+    <div class="btnContainer" id="myBtnContainer">
+      <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+      <button class="btn" onclick="filterSelection('AbvUpTo5')"> Alcohol level up to 5%</button>
+      <button class="btn" onclick="filterSelection('Abv5-10')"> Alcohol level 5%-10%</button>
+      <button class="btn" onclick="filterSelection('Abv10AndUp')"> Alcohol level 10% & up</button>
+      <h3>*Double Click on a card to see more info</h3>
+    </div>
+  </div>
+  <div class="container" id="beer-collection">
+  </div>
+  <script type="text/javascript" src="script.js"></script>
+</body>
+
+</html>

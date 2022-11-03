@@ -1,0 +1,182 @@
+let divCollect = document.querySelector('#beer-collection')
+
+
+function getBeers() {
+      return fetch('https://api.punkapi.com/v2/beers')
+            .then(res => res.json())
+}
+
+
+function renderBeers(beer) {
+            
+            
+                  let beerMesh = ''
+                  for (let i = 0; i < beer.method.mash_temp.length; i++) {            
+                       beerMesh += `<font size="+1.5"><b>Temp:</b></font><br>
+             ${beer.method.mash_temp[i].temp.value}\ Degree\ 
+             ${beer.method.mash_temp[i].temp.unit}<br>
+             <font size="+1.5"><b>Duration:</b></font><br> 
+             ${beer.method.mash_temp[i].duration}\ minutes<br><br>
+             `
+                  }
+
+                  let beerIngredientsMalt = ''
+                  for (let i = 0; i < beer.ingredients.malt.length; i++) {            
+                        beerIngredientsMalt += `
+              ${beer.ingredients.malt[i].name}:<br>
+              ${beer.ingredients.malt[i].amount.value}
+              ${beer.ingredients.malt[i].amount.unit}<br><br>
+              `
+                  }
+
+                  let beerIngredientsHops = ''
+                  for (let i = 0; i < beer.ingredients.hops.length; i++) {            
+                        beerIngredientsHops += `
+              ${beer.ingredients.hops[i].name}:<br>
+              ${beer.ingredients.hops[i].amount.value}
+              ${beer.ingredients.hops[i].amount.unit}<br>
+              <font size="+1.5"><b>Add:</b></font>
+              ${beer.ingredients.hops[i].add}<br>
+              <font size="+1.5"><b>Attribute:</b></font>
+              ${beer.ingredients.hops[i].attribute}<br><br>
+              `
+                  }
+                  
+
+      const beerDetails = `
+<font size="+2"><b>First brewed:</b></font><br>${beer.first_brewed}
+<br><br>
+<font size="+2"><b>About me:</b></font><br>${beer.description}
+<br><br>
+<font size="+2"><b>Food pairing:</b></font><br>${beer.food_pairing}
+<br><br>
+<font size="+2"><b>Contributed by:</b></font><br>${beer.contributed_by}
+`;
+
+      const beerRecipe = `
+<font size="+2"><b class=Abv title='Alcohol by Volume (ABV)
+ABV is the most common measurement of alcohol content in beer; it simply indicates how much of the total volume of liquid in a beer is made up of alcohol'>Abv:</b></font>\n${beer.abv}
+<br>
+<font size="+2"><b title='International Bitterness Units, a scale to gauge the level of a beer's bitterness. More specifically, IBUs measure the parts per million of isohumulone from hops in a beer, which gives beer bitterness.'>Ibu:</b></font>\n\n${beer.ibu}
+<br>
+<font size="+2"><b title='Final gravity measures the attenuation of the beer, which is the reduction of the wort's density caused by the fermentation of sugars into alcohol and carbon dioxide.'>Final gravity:</b></font>\ ${beer.target_fg}
+<br>
+<font size="+2"><b title='
+Original Gravity (OG), sometimes called original extract, is a measure of the solids content originally in the wort, before alcoholic fermentation has commenced to produce the beer.'>Original gravity:</b></font>\ ${beer.target_og}
+<br>
+<font size="+2"><b title='Color Units Ebc (European Brewery Convention) refer to the color of a beer measured in a technical manner'>Ebc:</b></font>\ ${beer.ebc}
+<br>
+<font size="+2"><b title='
+Standard Reference Method (Srm) is the method for color assessment of wort or beer as published in the recommended methods of the American Society of Brewing Chemists.'>Srm:</b></font>\ ${beer.srm}
+<br>
+<font size="+2"><b title='
+pH is an important factor in brewing quality beer. The pH levels during various stages of the brewing process affect extract potential, beer color, hot-break formation, foam stability, hop oil extraction, hop bitterness and lauterability of the beer.'>Ph:</b></font>\ ${beer.ph}
+<br>
+<font size="+2"><b title='Attenuation is the degree to which yeast ferments the sugar in a wort or must.'>Attenuation level:</b></font>\ ${beer.attenuation_level}
+<br>
+<font size="+2"><b>Volume:</b></font>\ ${beer.volume.value}\ ${beer.volume.unit}
+<br>
+<font size="+2"><b>Boil volume:</b></font>\ ${beer.boil_volume.value}\ ${beer.boil_volume.unit}
+<br><br>
+<font size="+2"><b>Method:</b></font><br><li><font size="+1.5"><b>Fermentation:</b></font></li>${beer.method.fermentation.temp.value}\ Degree\ ${beer.method.fermentation.temp.unit}<br><br>
+ <li><font size="+1.5"><b>Mash:</b></font><br></li>\ ${beerMesh}
+ 
+ <font size="+2"><b>Twist:</b></font><br>${beer.method.twist}
+ <br><br>
+ <font size="+2"><b>Ingredients:</b></font>
+ <br>
+ <li><font size="+1.5"><b>Malt</b></font></li>${beerIngredientsMalt}
+ <br>
+ <li><font size="+1.5"><b>Hops:</b></font></li><br>${beerIngredientsHops}
+ <font size="+2"><b>Yeast:</b></font><br> ${beer.ingredients.yeast}
+ <br><br>
+ <font size="+2"><b>Brewers tips:</b></font><br> ${beer.brewers_tips} 
+`;
+
+
+      let card = document.createElement('div')
+      card.setAttribute('class', 'card')
+      let cardInner = document.createElement('div')
+      cardInner.setAttribute('class', 'card__inner')
+      let cardFaceFront = document.createElement('div')
+      cardFaceFront.setAttribute('class', 'card__face card__face--front')
+      let cardFaceBack = document.createElement('div')
+      cardFaceBack.setAttribute('class', 'card__face card__face--back')
+      let cardContent = document.createElement('div')
+      cardContent.setAttribute('class', 'card__content')
+      let cardHeader = document.createElement('div')
+      cardHeader.setAttribute('class', 'card__header')
+      let cardBody = document.createElement('div')
+      cardBody.setAttribute('class', 'card__body')
+      let img = document.createElement('img')
+      img.setAttribute('src', beer.image_url)
+      img.setAttribute('class', 'beer-img')
+      let h1 = document.createElement('h1')
+      h1.setAttribute('id', 'tagline')
+      h1.innerText = beer.tagline
+      let h2 = document.createElement('h2')
+      h2.innerText = beer.name
+      let h3 = document.createElement('h3')
+      h3.innerText = beer.tagline
+      let p1 = document.createElement('p1')
+      p1.setAttribute('class', 'alcPre')
+      p1.innerHTML = beerRecipe;
+      
+
+
+
+      let recipeBtn = document.createElement('button')
+      recipeBtn.setAttribute('class', 'get_recipe')
+      recipeBtn.innerText = "View Recipe"
+
+      recipeBtn.addEventListener('mouseover', () => {
+            p1.innerHTML = beerRecipe;
+            
+            
+      })
+
+      
+      let beerBtn = document.createElement('button')
+      beerBtn.setAttribute('class', 'get_recipe')
+      beerBtn.innerText = "View Beer"
+
+      beerBtn.addEventListener('mouseover', () => {
+            p1.innerHTML = beerDetails;
+      })
+
+      cardInner.addEventListener('click', () => {
+            
+            p1.innerHTML = beerDetails;
+            cardInner.classList.toggle('is-flipped');
+            function scrollUp() {
+                  cardFaceBack.scrollTop = 0;
+            }
+            setTimeout(scrollUp, 1000)
+      })
+
+      let scrollUpBeerRecipe = document.createElement('button')
+      scrollUpBeerRecipe.setAttribute('class', 'go_up')
+      scrollUpBeerRecipe.innerText = 'Go up'
+
+      scrollUpBeerRecipe.addEventListener('mouseover', () => {
+            cardFaceBack.scrollTop = 0
+      })
+
+      divCollect.append(card)
+      card.append(cardInner)
+      cardInner.append(cardFaceFront, cardFaceBack)
+      cardFaceFront.append(h2, img, h1)
+      cardFaceBack.append(cardContent)
+      cardContent.append(cardHeader, cardBody)
+      cardHeader.append(recipeBtn, beerBtn)
+      cardBody.append(p1, scrollUpBeerRecipe)
+}
+ 
+
+getBeers().then(beers => {
+      beers.forEach(beer => {
+            renderBeers(beer)
+
+      })
+})
+

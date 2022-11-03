@@ -1,0 +1,223 @@
+:root {
+  --primary: #FFCE00;
+  --secondary: #fe4880;
+  --dark: #212121;
+  --light: #F3F3F3;
+}
+
+body {
+  font-family: papyrus;
+  width: 100%;
+  min-height: 100vh;
+  background-image: url('https://assets.gqindia.com/photos/60518c926f563f1c3d4749eb/master/w_1600%2Cc_limit/Interior%2520Image1.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+br {
+  line-height: 19px;
+}
+
+h1 {
+  font-size: 30px;
+  text-align: center;
+  color: #FFF;
+}
+
+h3 {
+  color: #FFF;
+}
+
+#tagline {
+  color: #FFF;
+}
+
+#beer-header {
+  display: flex;
+  justify-content: center;
+  opacity: .8;
+  height: 7rem;
+}
+
+.container {
+  overflow: hidden;
+}
+
+.filterDiv {
+  float: left;
+  perspective: 1000px;
+  margin: 1.5rem;
+  width: 320px;
+  height: 500px;
+  display: none;
+  /* Hidden by default */
+}
+
+
+.show {
+  display: block;
+}
+
+.card__inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  cursor: url(http://www.rw-designer.com/cursor-extern.php?id=93237), auto;
+}
+
+.card__inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.card__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0px 3px 18px 3px rgba(0, 0, 0, 0.2);
+}
+
+.card__face--front {
+  background-image: linear-gradient(to bottom right, var(--primary), var(--secondary));
+  display: inline-grid;
+}
+
+.card__face--front h2 {
+  color: #FFF;
+  font-size: 32px;
+  align-self: center;
+  justify-self: center;
+  text-align: center;
+}
+
+.card__face--back {
+  background-color: var(--light);
+  transform: rotateY(180deg);
+  overflow: auto;
+}
+
+.card__content {
+  width: 100%;
+  height: 100%;
+}
+
+.card__header {
+  position: relative;
+  padding: 30px 30px 5px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.card__header:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  border-radius: 0 0 50% 0;
+  background-image: linear-gradient(to bottom left, var(--primary) 10%, var(--secondary) 115%);
+}
+
+.card__header h2 {
+  color: #FFF;
+  font-size: 32px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.card__body {
+  padding: 30px;
+}
+
+.card__body h3 {
+  color: var(--dark);
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.card__body p1 {
+  color: var(--dark);
+  font-size: 18px;
+  line-height: 1.5;
+  position: relative;
+}
+
+button {
+  background-color: inherit;
+  border-width: 0.1mm;
+  border-radius: 5px;
+  border-color: #FFF;
+  height: 2rem;
+  width: max-content;
+  color: whitesmoke;
+  font-size: 17px;
+  margin: 8px;
+  cursor: url(http://www.rw-designer.com/cursor-extern.php?id=93237), auto;
+}
+
+button:hover {
+  background-color: whitesmoke;
+  border: #e04b52 solid 1px;
+  color: #e04b52;
+}
+
+.go_up {
+  background-image: linear-gradient(to bottom right, var(--primary), var(--secondary));
+  border-width: 0.1mm;
+  border-radius: 5px;
+  border-color: rgb(255, 255, 255);
+  height: 2rem;
+  width: max-content;
+  color: rgb(255, 255, 255);
+  font-size: 17px;
+  margin: 8px;
+  cursor: url(http://www.rw-designer.com/cursor-extern.php?id=93237), auto;
+  position: relative;
+  bottom: 0px;
+  right: 0px;
+}
+
+.beer-img {
+  justify-self: center;
+  height: 12rem;
+  width: auto;
+}
+
+.category-head {
+  margin: 30px 0;
+}
+
+.category-head ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.category-title {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background: #a8a8a8;
+  padding: 12px;
+  color: #fff;
+  margin: 5px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.active {
+  background: #f0544f;
+}
+
+.filter-container {
+  text-align: center;
+}
